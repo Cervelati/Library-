@@ -56,6 +56,46 @@ namespace Biblioteca.Api.Services;
 
             return emprestimo;
         }
+
+        // SERVICE DE DEVOLUÇÃO DO EMPRÉSTIMO 
+
+        public async Task <Emprestimo> DevolverAsync (int id)
+        {
+            var devolver = await _context.Emprestimos
+            .Include(e => e.Livro)
+            .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (devolver == null)
+            {
+                throw new KeyNotFoundException("Emprestimo não encontrado!");
+            }
+            if (devolver.DataDevolucaoReal != null)
+            {
+                throw new InvalidOperationException ("Emprestimo encerrado, Livro devolvido!");
+            }
+            
+            devolver.DataDevolucaoReal = DateTime.UtcNow;
+            devolver.Livro.Estoque ++;
+
+            await _context.SaveChangesAsync();
+            return devolver;
+        }
+
+        public async Task <List<Emprestimo>> ListarTodosAsync ()
+        {
+            var lista = await _context.Emprestimos.ToListAsync();
+            return lista;
+        }
+        
+        public async Task <Emprestimo> BuscarPorIdAsync (int id)
+        {
+            var buscaId = await _context.Emprestimos.FindAsync(id);
+                if (buscaId == null)
+                {
+                    throw new KeyNotFoundException($"Empréstimo {id} não encontrado!");
+                }
+            return buscaId;
+        }
     }
 
     

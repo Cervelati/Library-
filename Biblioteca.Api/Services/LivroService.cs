@@ -19,9 +19,15 @@ namespace Biblioteca.Api.Services;
             return livro;
         }
 
-        public async Task <Livro?> BuscarPorIdAsync (int id)
+        public async Task <Livro> BuscarPorIdAsync (int id)
         {
-            return await _context.Livros.FindAsync(id);
+            var livro = await _context.Livros.FindAsync(id);
+            if (livro == null)
+            {
+                throw new KeyNotFoundException($"Livro {id} não encontrado!");
+            }
+            return livro;
+            
         }
 
         public async Task <List<Livro>> ListarTodosAsync () 
