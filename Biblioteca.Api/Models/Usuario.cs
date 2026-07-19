@@ -1,4 +1,5 @@
 
+namespace Biblioteca.Api.Models;
 
 public class Usuario {
 

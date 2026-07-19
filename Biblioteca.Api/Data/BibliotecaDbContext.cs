@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Biblioteca.Api.Models;
+
+namespace Biblioteca.Api.Data;
 
 public class BibliotecaDbContext : DbContext {
 
