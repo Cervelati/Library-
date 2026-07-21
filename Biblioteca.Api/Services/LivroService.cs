@@ -35,7 +35,7 @@ namespace Biblioteca.Api.Services;
             return await _context.Livros.ToListAsync();
         }
 
-        public async Task  AtualizarAsync (int id, Livro livroAtualizado) 
+        public async Task <Livro>  AtualizarAsync (int id, Livro livroAtualizado) 
         {
             var atualizarLivro = await _context.Livros.FindAsync(id);
             if (atualizarLivro == null) {
@@ -50,13 +50,14 @@ namespace Biblioteca.Api.Services;
 
 
             await _context.SaveChangesAsync();
+            return atualizarLivro;
         }
 
-        public async Task AtualizarEstoque (int id, int estoqueAtualizado)
+        public async Task AtualizarEstoqueAsync (int id, int estoqueAtualizado)
         {
             if (estoqueAtualizado < 0)
             {
-                throw new ArgumentException ("Estoque não pode ser negativo1");
+                throw new ArgumentException ("Estoque não pode ser negativo!");
             }
 
             var atualizarEstoque = await _context.Livros.FindAsync(id);

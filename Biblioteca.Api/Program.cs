@@ -1,10 +1,10 @@
 using Scalar.AspNetCore;
-using Microsoft.OpenApi.Models;
 using Biblioteca.Api.Data;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
 builder.Services.AddDbContext<BibliotecaDbContext>
 (options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -17,5 +17,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();
