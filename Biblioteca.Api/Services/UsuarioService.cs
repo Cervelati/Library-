@@ -14,6 +14,7 @@ public class UsuarioService {
 
     public async Task <Usuario> CriarAsync(Usuario usuario)
     {
+        usuario.DataCadastro = DateTime.UtcNow;
         _context.Usuarios.Add(usuario);
         await _context.SaveChangesAsync();
         return usuario;
