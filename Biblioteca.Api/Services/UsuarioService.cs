@@ -37,7 +37,7 @@ public class UsuarioService {
         return usuario;
     }
 
-    public async Task <Usuario> AltualizaAsync (int id, Usuario usuarioAtualizado)
+    public async Task <Usuario> AtualizarAsync (int id, Usuario usuarioAtualizado)
     {
         var usuario = await _context.Usuarios.FindAsync(id);
         if (usuario == null) 
