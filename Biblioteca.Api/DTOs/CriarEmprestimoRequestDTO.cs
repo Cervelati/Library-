@@ -2,7 +2,7 @@
 
 namespace Biblioteca.Api.DTOs;
 
-    public class CriarEmprestimoRequest
+    public class CriarEmprestimoRequestDTO
     {
         public required int UsuarioId {get; set;}
         public required string Nome {get; set;}

@@ -14,6 +14,7 @@ namespace Biblioteca.Api.Services;
 
         public async Task <Livro> CriarAsync(Livro livro) 
         {
+            livro.AnoPublicacao = DateTime.SpecifyKind(livro.AnoPublicacao, DateTimeKind.Utc);
             _context.Livros.Add(livro);
             await _context.SaveChangesAsync();
             return livro;
@@ -69,6 +70,7 @@ namespace Biblioteca.Api.Services;
             atualizarEstoque.Estoque = estoqueAtualizado;
             
             await _context.SaveChangesAsync();
+        
         }
 
         public async Task  DeletarAsync (int id) 

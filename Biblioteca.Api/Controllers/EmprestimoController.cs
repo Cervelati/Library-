@@ -33,7 +33,7 @@ namespace Biblioteca.Api.Controllers;
         }
 
         [HttpPost]
-        public async Task <IActionResult> CriarCAsync (CriarEmprestimoRequest EmprestimoDTO)
+        public async Task <IActionResult> CriarCAsync (CriarEmprestimoRequestDTO EmprestimoDTO)
         {
             var emprestimoCriado = await _emprestimoService.CriarAsync(
                 EmprestimoDTO.UsuarioId,

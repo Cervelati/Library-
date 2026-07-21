@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Api.Models;
 using Biblioteca.Api.Services;
+using Biblioteca.Api.DTOs;
 
 namespace Biblioteca.Api.Controllers;
 
@@ -33,10 +34,14 @@ namespace Biblioteca.Api.Controllers;
         }
 
         [HttpPost]
-        public async Task <IActionResult> CriarCAsync (Usuario usuario)
+        public async Task <IActionResult> CriarCAsync (CriarUsuarioRequestDTO request)
         {
+            var usuario = new Usuario {
+                Nome = request.Nome,
+                Email = request.Email
+            };
+            
             await _usuarioService.CriarAsync(usuario);
-
             return Created();
         }
 

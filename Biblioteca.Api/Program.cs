@@ -1,4 +1,5 @@
 using Scalar.AspNetCore;
+using Biblioteca.Api;
 using Biblioteca.Api.Data;
 using Biblioteca.Api.Services;
 using Biblioteca.Api. Controllers;
@@ -22,6 +23,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.MapControllers();
 
