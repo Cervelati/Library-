@@ -5,7 +5,7 @@ using Biblioteca.Api.Services;
 using Biblioteca.Api. Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IndentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,7 @@ builder.Services.AddDbContext<BibliotecaDbContext>
 builder.Services.AddScoped<LivroService>();
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<EmprestimoService>();
+builder.Services.AddScoped<BibliotecarioService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
