@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Biblioteca.Api.Models;
 using Biblioteca.Api.Services;
 using Biblioteca.Api.DTOs;
+
 
 namespace Biblioteca.Api.Controllers;
 
     [ApiController]
     [Route("api/[Controller]")]
+    [Authorize]
     public class EmprestimoController : ControllerBase 
     {
         private readonly EmprestimoService _emprestimoService;
