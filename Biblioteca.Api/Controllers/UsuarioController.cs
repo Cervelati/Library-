@@ -46,11 +46,15 @@ namespace Biblioteca.Api.Controllers;
         }
 
         [HttpPatch("{id}")]
-        public async Task <IActionResult> AtualizarCAsync (int id, Usuario usuario)
+        public async Task <IActionResult> AtualizarCAsync (int id, AtualizarUsuarioRequestDTO request)
         {
-            var usuarioAtualizado = await _usuarioService.AtualizarAsync(id, usuario);
-
-            return Ok (usuarioAtualizado);
+            var usuarioAtualizado = new Usuario {
+                Nome = request.Nome,
+                Email = request.Email
+            };
+            
+            var usuarioSalvo = await _usuarioService.AtualizarAsync(id, usuarioAtualizado);
+            return Ok (usuarioSalvo);
         }
 
         [HttpDelete("{id}")]

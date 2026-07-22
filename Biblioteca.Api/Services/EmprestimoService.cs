@@ -81,19 +81,27 @@ namespace Biblioteca.Api.Services;
             return devolver;
         }
 
-        public async Task <List<Emprestimo>> ListarTodosAsync ()
+        public async Task<List<Emprestimo>> ListarTodosAsync()
         {
-            var lista = await _context.Emprestimos.ToListAsync();
+            var lista = await _context.Emprestimos
+                .Include(e => e.Livro)
+                .Include(e => e.Usuario)
+                .OrderBy(e => e.Id)
+                .ToListAsync();
             return lista;
         }
         
-        public async Task <Emprestimo> BuscarPorIdAsync (int id)
+        public async Task<Emprestimo> BuscarPorIdAsync(int id)
         {
-            var buscaId = await _context.Emprestimos.FindAsync(id);
-                if (buscaId == null)
-                {
-                    throw new KeyNotFoundException($"Empréstimo {id} não encontrado!");
-                }
+            var buscaId = await _context.Emprestimos
+                .Include(e => e.Livro)
+                .Include(e => e.Usuario)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (buscaId == null)
+            {
+                throw new KeyNotFoundException($"Empréstimo {id} não encontrado!");
+            }
             return buscaId;
         }
     }

@@ -45,10 +45,11 @@ namespace Biblioteca.Api.Controllers;
         }
 
         [HttpPatch("{id}")]
-        public async Task <IActionResult> DevolucaoCAsync (int id)
+        public async Task<IActionResult> DevolucaoCAsync(int id)
         {
             var emprestimoDevolvido = await _emprestimoService.DevolverAsync(id);
-
             return Ok(emprestimoDevolvido);
         }
+
+        
     }
